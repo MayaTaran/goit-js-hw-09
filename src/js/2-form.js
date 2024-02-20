@@ -1,9 +1,11 @@
 const STORAGE_KEY = "feedback-form-state";
 const form = document.querySelector(".feedback-form");
+const emailInput = form.querySelector('.email-input');
+const messageInput = form.querySelector('.message-input');
 
-function readFormData(form) {
-    const emailValue = form.querySelector('.email-input').value.trim();
-    const messageValue = form.querySelector('.message-input').value.trim();
+function readFormData() {
+    const emailValue = emailInput.value.trim();
+    const messageValue = messageInput.value.trim();
 
     return {
         email: emailValue,
@@ -11,9 +13,8 @@ function readFormData(form) {
     };
 }
 
-form.addEventListener("input", (event) => {
-    event.preventDefault();
-    const data = readFormData(event.currentTarget);
+form.addEventListener("input", () => {
+    const data = readFormData(form);
     const jsonData = JSON.stringify(data);
     localStorage.setItem(STORAGE_KEY, jsonData);
 });
@@ -22,13 +23,13 @@ const rawData = localStorage.getItem(STORAGE_KEY);
 
 if (rawData) {
     const data = JSON.parse(rawData);
-    form.querySelector('.email-input').value = data.email;
-    form.querySelector('.message-input').value = data.message;
+    emailInput.value = data.email;
+    messageInput.value = data.message;
 }
+
 form.addEventListener("submit", (event) => {
-    event.preventDefault();
+    event.preventDefault(); 
     const data = readFormData(form);
     console.log(data.email, data.message);
-      localStorage.removeItem(STORAGE_KEY);
-     form.reset();
-})
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); 
+});
