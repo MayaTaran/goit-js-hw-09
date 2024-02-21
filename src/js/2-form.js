@@ -30,8 +30,9 @@ if (rawData) {
 form.addEventListener("submit", (event) => {
     event.preventDefault(); 
     const data = readFormData(form);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     console.log(data);
-     localStorage.removeItem(STORAGE_KEY);
+    // localStorage.removeItem(STORAGE_KEY);
     form.reset();
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); 
+   
 });
