@@ -32,7 +32,7 @@ form.addEventListener("submit", (event) => {
     const data = readFormData(form);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     console.log(data);
-    // localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_KEY);
     form.reset();
    
 });
